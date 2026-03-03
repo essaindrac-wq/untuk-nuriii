@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for My Everything, Nurfajriah ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background Animasi Partikel */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* Container Utama */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Kartu Utama */
+        .love-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transform: scale(0);
+            animation: popIn 1s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .love-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Judul */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Subjudul */
+        .subtitle {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        /* Pesan Cinta */
+        .love-message {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+            position: relative;
+            border-left: 5px solid #e74c3c;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-out 0.5s forwards;
+        }
+        
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .love-message p {
+            margin-bottom: 15px;
+        }
+        
+        /* Highlight Text */
+        .highlight {
+            color: #e74c3c;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #e74c3c;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* Tombol Interaktif */
+        .btn-container {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .love-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .love-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .love-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .love-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .love-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Tombol Surprise */
+        .surprise-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .surprise-btn:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+        
+        /* Tombol Musik - PERBAIKAN */
+        .music-btn {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            border: 2px solid #e94560;
+            font-weight: bold;
+        }
+        
+        .music-btn:hover {
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.6);
+        }
+        
+        .music-btn.playing {
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7); }
+            50% { box-shadow: 0 0 0 15px rgba(233, 69, 96, 0); }
+        }
+        
+        /* Efek Hati Melayang */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b6b;
+            animation: float 4s ease-in infinite;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Galeri Foto */
+        .photo-gallery {
+            display: none;
+            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .photo-gallery.active {
+            display: grid;
+        }
+        
+        .photo-slot {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 150px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-slot:hover {
+            transform: scale(1.05);
+        }
+        
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        /* Pesan Rahasia */
+        .secret-message {
+            display: none;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            animation: bounceIn 0.6s ease;
+            position: relative;
+        }
+        
+        .secret-message.active {
+            display: block;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Musik Visualizer */
+        .music-indicator {
+            display: none;
+            margin-top: 20px;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .music-indicator.active {
+            display: flex;
+        }
+        
+        .bar {
+            width: 6px;
+            height: 30px;
+            background: #e74c3c;
+            border-radius: 3px;
+            animation: dance 1s ease-in-out infinite;
+        }
+        
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes dance {
+            0%, 100% { height: 20px; }
+            50% { height: 40px; }
+        }
+        
+        /* Status Musik */
+        .music-status {
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f0f0f0;
+            display: none;
+        }
+        
+        .music-status.active {
+            display: block;
+        }
+        
+        .music-status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .music-status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            .love-card { padding: 25px; }
+            .love-message { font-size: 1em; padding: 20px; }
+            .love-btn { padding: 12px 30px; font-size: 1em; }
+        }
+        
+        /* Efek Ketikan */
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Counter Hari */
+        .days-counter {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px dashed #e74c3c;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .days-counter.active {
+            display: block;
+            animation: pulse 2s infinite;
+        }
+        
+        .counter-number {
+            font-size: 3em;
+            color: #e74c3c;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+        }
+        
+        /* Love Meter */
+        .love-meter {
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .love-meter.active {
+            display: block;
+        }
+        
+        .meter-container {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+            width: 0%;
+            border-radius: 50px;
+            transition: width 2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ╔════════════════════════════════════════════════════════════╗ -->
+    <!-- ║  PERBAIKAN 1: AUDIO DENGAN FILE LOKAL YANG BENAR           ║ -->
+    <!-- ║  Pastikan file MP3 ada di folder yang SAMA dengan HTML    ║ -->
+    <!-- ╚════════════════════════════════════════════════════════════╝ -->
+    
+    <audio id="bgMusic" preload="auto">
+        <!-- CARA 1: File di folder yang sama (REKOMENDASI) -->
+        <!-- Rename file jadi nama pendek: a7x.mp3 -->
+        <source src="a7x.mp3" type="audio/mpeg">
+        
+        <!-- CARA 2: Kalau mau pakai nama panjang (tidak direkomendasikan) -->
+        <!-- <source src="Avenged%20Sevenfold%20-%20A%20Little%20Piece%20Of%20Heaven.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <!-- Canvas untuk Partikel -->
+    <div id="canvas-container">
+        <canvas id="particleCanvas"></canvas>
+    </div>
+    
+    <!-- Container Hati Melayang -->
+    <div class="floating-hearts" id="heartsContainer"></div>
+    
+    <!-- Container Utama -->
+    <div class="container">
+        <div class="love-card">
+            <h1>ke Semanggi beli paku, selamat pagi sayangkuu,cintakuu, maniskuu ❤️</h1>
+            <p class="subtitle"></p>
+            
+                     <!-- Status Musik -->
+            <div class="music-status" id="musicStatus">🎸 Menunggu file musik...</div>
+            
+            <div class="love-message">
+                <p> <span class="highlight" contenteditable="true">ayangggg</span>,</p>
+                <p>semangat yaa buat gawenyaa nanti 💪🔥🔥<span class="highlight">semangat juga puasanya yaa cintaa❤️</span>. 
+                Nanti berangkatnya aatiatii dijalan yaa </p>
+                <p><span class="highlight">sehat sehatt cantikk🥰🤗</span></p>
+            </div>
+            
+           
+            
+            <!-- Love Meter -->
+            <div class="love-meter" id="loveMeter">
+                <p></p>
+                <div class="meter-container">
+                    <div class="meter-fill" id="meterFill">0%</div>
+                </div>
+            </div>
+            
+            <!-- Musik Visualizer -->
+            <div class="music-indicator" id="musicIndicator">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            
+            <!-- Pesan Rahasia -->
+            <div class="secret-message" id="secretMessage">
+                Lafyuuu Moreee Nuri💝💝
+            </div>
+            
+            <!-- Galeri Foto - PERBAIKAN PATH -->
+            <div class="photo-gallery" id="photoGallery">
+                <div class="photo-slot">
+                    <img src="c:\Users\mahes\Desktop\foto 1.jpg" alt="❤️">
+                </div>
+                <div class="photo-slot">
+                    <img src="c:\Users\mahes\Desktop\foto 2.jpg" alt="❤️">
+                </div>
+                <div class="photo-slot">
+                    <img src="c:\Users\mahes\Desktop\foto 3.jpg" alt="❤️">
+                </div>
+                <div class="photo-slot">
+                    <img src="c:\Users\mahes\Desktop\foto 4.jpg" alt="❤️">
+                </div>
+            </div>
+            
+            <!-- Tombol Interaktif - PERBAIKAN: tambahkan ID musicBtn -->
+            <div class="btn-container">
+                <button class="love-btn" onclick="showLove()">💌 Kirim Cinta</button>
+                <button class="love-btn surprise-btn" onclick="showSurprise()">🎁 Surprise!</button>
+                <button class="love-btn music-btn" id="musicBtn" onclick="toggleMusic()">🎵 A7X - Play</button>
+                <button class="love-btn" onclick="showLoveMeter()" style="background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);">💕 Love Meter</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Minggu, 10 September 2023 | <span id="currentDate"></span>
+        </div>
+    </div>
+
+    <script>
+        // Inisialisasi Tanggal
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('id-ID', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        // PERBAIKAN 2: JAVASCRIPT MUSIK YANG BENAR (Hanya 1 fungsi)
+        // ═══════════════════════════════════════════════════════════
+        
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicStatus = document.getElementById('musicStatus');
+        const musicIndicator = document.getElementById('musicIndicator');
+        let isPlaying = false;
+        
+        // Debug: Cek apakah audio element ada
+        console.log('Audio element:', music);
+        console.log('Audio source:', music.querySelector('source').src);
+        
+        // Event: Saat metadata loaded
+        music.addEventListener('loadedmetadata', function() {
+            console.log('✅ Metadata loaded! Duration:', music.duration);
+            musicStatus.classList.add('active', 'success');
+            musicStatus.innerHTML = '✅ <b>File musik ditemukan!</b><br>Siap diputar';
+        });
+        
+        // Event: Saat bisa diputar sepenuhnya
+        music.addEventListener('canplaythrough', function() {
+            console.log('✅ Can play through!');
+            musicStatus.classList.add('active', 'success');
+            musicStatus.innerHTML = '✅ <b>Musik siap!</b> Klik Play 🎵';
+        });
+        
+        // Event: Saat error (file tidak ketemu)
+        music.addEventListener('error', function(e) {
+            console.error('❌ Audio error:', e);
+            console.error('Error code:', music.error ? music.error.code : 'unknown');
+            
+            let errorMsg = 'File tidak ditemukan';
+            if (music.error) {
+                switch(music.error.code) {
+                    case 1: errorMsg = 'Proses download dibatalkan'; break;
+                    case 2: errorMsg = 'Network error'; break;
+                    case 3: errorMsg = 'File corrupt/format tidak support'; break;
+                    case 4: errorMsg = 'File tidak ditemukan (404) - cek nama file'; break;
+                }
+            }
+            
+            musicStatus.classList.add('active', 'error');
+            musicStatus.innerHTML = '❌ <b>Error:</b> ' + errorMsg + '<br>Pastikan file a7x.mp3 ada di folder ini';
+            musicBtn.disabled = true;
+            musicBtn.textContent = '❌ Error';
+        });
+        
+        // Event: Saat mulai play
+        music.addEventListener('play', function() {
+            console.log('▶️ Musik mulai diputar');
+            isPlaying = true;
+            musicIndicator.classList.add('active');
+        });
+        
+        // Event: Saat pause
+        music.addEventListener('pause', function() {
+            console.log('⏸ Musik dijeda');
+            isPlaying = false;
+            musicIndicator.classList.remove('active');
+        });
+        
+        // Event: Saat selesai
+        music.addEventListener('ended', function() {
+            console.log('⏹ Musik selesai');
+            isPlaying = false;
+            musicBtn.textContent = '🎵 A7X - Play';
+            musicBtn.classList.remove('playing');
+            musicIndicator.classList.remove('active');
+            musicStatus.innerHTML = '✅ <b>Selesai</b> - Klik Play lagi';
+        });
+        
+        // ═══════════════════════════════════════════════════════════
+        // FUNGSI TOGGLE MUSIK (Hanya 1 fungsi ini, tidak dobel)
+        // ═══════════════════════════════════════════════════════════
+        
+        function toggleMusic() {
+            console.log('=== TOGGLE MUSIK ===');
+            console.log('isPlaying:', isPlaying);
+            console.log('music.paused:', music.paused);
+            console.log('readyState:', music.readyState);
+            
+            // Cek apakah file sudah siap
+            if (music.readyState === 0) {
+                alert('⏳ File masih loading...\nTunggu sebentar atau cek console (F12)');
+                return;
+            }
+            
+            if (isPlaying) {
+                // PAUSE
+                music.pause();
+                isPlaying = false;
+                musicBtn.textContent = '🎵 A7X - Play';
+                musicBtn.classList.remove('playing');
+                musicStatus.innerHTML = '⏸ <b>Dihentikan</b>';
+            } else {
+                // PLAY
+                musicStatus.innerHTML = '⏳ <b>Memulai...</b>';
+                
+                const playPromise = music.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(function() {
+                            // BERHASIL
+                            console.log('✅ Play success!');
+                            isPlaying = true;
+                            musicBtn.textContent = '⏸ Pause';
+                            musicBtn.classList.add('playing');
+                            musicStatus.innerHTML = '▶️ <b>Playing: A7X - A Little Piece of Heaven</b>';
+                            
+                            // Efek hati
+                            for (let i = 0; i < 30; i++) {
+                                setTimeout(createFloatingHeart, i * 100);
+                            }
+                        })
+                        .catch(function(error) {
+                            // GAGAL
+                            console.error('❌ Play error:', error);
+                            isPlaying = false;
+                            
+                            if (error.name === 'NotAllowedError') {
+                                alert('⚠️ Browser memblok autoplay.\n\nSolusi:\n1. Klik OK di dialog ini\n2. Lalu klik tombol Play lagi');
+                                musicStatus.innerHTML = '⚠️ <b>Klik Play lagi setelah OK</b>';
+                            } else if (error.name === 'NotSupportedError') {
+                                alert('❌ Format file tidak didukung.\nPastikan file benar-benar MP3!');
+                                musicStatus.innerHTML = '❌ <b>Format error</b>';
+                            } else {
+                                alert('❌ Error: ' + error.message);
+                                musicStatus.innerHTML = '❌ <b>Error memutar</b>';
+                            }
+                        });
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        // FUNGSI LAIN (Tidak ada yang dobel)
+        // ═══════════════════════════════════════════════════════════
+
+        // Sistem Partikel Background
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 100;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = `rgba(255, ${Math.random() * 100 + 100}, ${Math.random() * 100 + 150}, ${Math.random() * 0.5 + 0.2})`;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance/1000})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        initParticles();
+        animateParticles();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Generator Hati Melayang
+        function createFloatingHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = ['❤️', '💖', '💕', '💗', '💓', '💝'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        setInterval(createFloatingHeart, 800);
+
+        // Fungsi Tombol
+        function showLove() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createFloatingHeart, i * 100);
+            }
+            
+            const card = document.querySelector('.love-card');
+            card.style.animation = 'none';
+            setTimeout(() => {
+                card.style.animation = 'popIn 1s ease-out';
+            }, 10);
+            
+            alert('💌 Cinta sudah terkirim ke hatimu! 💌');
+        }
+        
+        function showSurprise() {
+            const secret = document.getElementById('secretMessage');
+            const gallery = document.getElementById('photoGallery');
+            
+            if (secret.classList.contains('active')) {
+                secret.classList.remove('active');
+                gallery.classList.remove('active');
+            } else {
+                secret.classList.add('active');
+                gallery.classList.add('active');
+                
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(createFloatingHeart, i * 50);
+                }
+            }
+        }
+        
+        function showLoveMeter() {
+            const meter = document.getElementById('loveMeter');
+            const fill = document.getElementById('meterFill');
+            
+            meter.classList.add('active');
+            
+            setTimeout(() => {
+                fill.style.width = '100%';
+                fill.textContent = '100%';
+            }, 100);
+            
+            setTimeout(() => {
+                fill.style.width = '0%';
+                fill.textContent = '0%';
+            }, 3000);
+        }
+
+        // Interaksi Mouse
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.love-card');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Hitung Hari
+        function calculateDays() {
+            const startDate = new Date('2023-01-01');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('daysNumber').textContent = diffDays;
+            document.getElementById('daysCounter').classList.add('active');
+        }
+        
+        document.querySelector('.love-card').addEventListener('dblclick', calculateDays);
+
+        // Efek Klik Love
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('love-btn')) return;
+            
+            const heart = document.createElement('div');
+            heart.textContent = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.fontSize = '24px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.animation = 'float 2s ease-out forwards';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 2000);
+        });
+
+        // Keyboard Shortcut
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ') {
+                e.preventDefault();
+                showLove();
+            }
+            if (e.key === 's' || e.key === 'S') {
+                showSurprise();
+            }
+        });
+
+        console.log('%c❤️ Made with love for Nurfajriah! ❤️', 'color: #e74c3c; font-size: 20px; font-weight: bold;');
+    </script>
+</body>
+</html>
